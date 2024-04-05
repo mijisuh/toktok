@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0913CC152BC0608B0071CF2D /* StepSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC142BC0608B0071CF2D /* StepSlider.swift */; };
+		0913CC172BC07F460071CF2D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC162BC07F460071CF2D /* UILabel+.swift */; };
+		0913CC192BC088DC0071CF2D /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC182BC088DC0071CF2D /* UITextField+.swift */; };
+		0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */; };
+		0913CC1D2BC0A81C0071CF2D /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */; };
+		0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1E2BC0AE800071CF2D /* Common.swift */; };
 		09BFECCA2BBEDC4900DBF7F1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECC92BBEDC4900DBF7F1 /* RxCocoa */; };
 		09BFECCC2BBEDC4900DBF7F1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCB2BBEDC4900DBF7F1 /* RxRelay */; };
 		09BFECCE2BBEDC4900DBF7F1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCD2BBEDC4900DBF7F1 /* RxSwift */; };
 		09BFECD12BBEDC5900DBF7F1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECD02BBEDC5900DBF7F1 /* SnapKit */; };
+		09BFECD32BBEE98700DBF7F1 /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */; };
 		09F77C152BBEA6E20094CFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */; };
 		09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */; };
 		09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C182BBEA6E20094CFC9 /* MainViewController.swift */; };
@@ -22,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0913CC142BC0608B0071CF2D /* StepSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSlider.swift; sourceTree = "<group>"; };
+		0913CC162BC07F460071CF2D /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		0913CC182BC088DC0071CF2D /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
+		0913CC1E2BC0AE800071CF2D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
 		09F77C112BBEA6E20094CFC9 /* TokTok.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokTok.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +63,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0913CC122BC05D1F0071CF2D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				09F77C182BBEA6E20094CFC9 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0913CC132BC05D270071CF2D /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				0913CC142BC0608B0071CF2D /* StepSlider.swift */,
+				09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */,
+				0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		09F77C082BBEA6E20094CFC9 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +102,7 @@
 			children = (
 				09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */,
 				09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */,
+				0913CC1E2BC0AE800071CF2D /* Common.swift */,
 				09F77C362BBEB5640094CFC9 /* Scenes */,
 				09F77C392BBECAAC0094CFC9 /* Extensions */,
 				09F77C1D2BBEA6E50094CFC9 /* Assets.xcassets */,
@@ -82,7 +115,8 @@
 		09F77C362BBEB5640094CFC9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				09F77C182BBEA6E20094CFC9 /* MainViewController.swift */,
+				0913CC122BC05D1F0071CF2D /* Main */,
+				0913CC132BC05D270071CF2D /* SignUp */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -93,6 +127,9 @@
 				09F77C372BBECA580094CFC9 /* UIColor+.swift */,
 				09F77C3A2BBECE930094CFC9 /* UIButton+.swift */,
 				09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */,
+				0913CC162BC07F460071CF2D /* UILabel+.swift */,
+				0913CC182BC088DC0071CF2D /* UITextField+.swift */,
+				0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -177,10 +214,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0913CC172BC07F460071CF2D /* UILabel+.swift in Sources */,
+				0913CC192BC088DC0071CF2D /* UITextField+.swift in Sources */,
+				0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */,
 				09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */,
+				0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */,
+				09BFECD32BBEE98700DBF7F1 /* SignUpEmailViewController.swift in Sources */,
+				0913CC152BC0608B0071CF2D /* StepSlider.swift in Sources */,
 				09F77C382BBECA580094CFC9 /* UIColor+.swift in Sources */,
 				09F77C152BBEA6E20094CFC9 /* AppDelegate.swift in Sources */,
 				09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */,
+				0913CC1D2BC0A81C0071CF2D /* SignUpPasswordViewController.swift in Sources */,
 				09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */,
 				09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */,
 			);

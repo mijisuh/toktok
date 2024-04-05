@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .speechBubble
@@ -45,15 +45,15 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    private lazy var signupButton: UIButton = {
+    private lazy var signUpButton: UIButton = {
         let button = UIButton.rounded
         button.setTitle("시작하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .primary
+        button.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
         return button
     }()
     
-    private lazy var signinLabel: UILabel = {
+    private lazy var signInLabel: UILabel = {
         let label = UILabel()
         label.text = "이미 계정이 있나요? "
         label.textColor = .tertiaryLabel
@@ -61,7 +61,7 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    private lazy var signinButton: UIButton = {
+    private lazy var signInButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.label, for: .normal)
@@ -71,7 +71,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViews()
     }
 }
@@ -80,22 +79,22 @@ private extension MainViewController {
     func setUpViews() {
         view.backgroundColor = .background
         
-        let signinStackView = UIStackView(arrangedSubviews: [signinLabel, signinButton])
+        let signinStackView = UIStackView(arrangedSubviews: [signInLabel, signInButton])
         signinStackView.axis = .horizontal
-        signinStackView.spacing = 8
+        signinStackView.spacing = 6
         
         [
             imageView,
             appNameLabel,
             appDescriptionLabel,
-            signupButton,
+            signUpButton,
             signinStackView
         ].forEach { view.addSubview($0) }
         
-        let margin: CGFloat = 24.0
+        let margin: CGFloat = 16.0
         
         imageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(margin + 12.0)
+            $0.leading.equalToSuperview().inset(margin + 20.0)
             $0.centerY.equalToSuperview()
             $0.width.equalTo(64.0)
             $0.height.equalTo(64.0)
@@ -111,7 +110,7 @@ private extension MainViewController {
             $0.top.equalTo(appNameLabel.snp.bottom).offset(16.0)
         }
         
-        signupButton.snp.makeConstraints {
+        signUpButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(margin)
             $0.top.equalTo(appDescriptionLabel.snp.bottom).offset(72.0)
             $0.height.equalTo(46.0)
@@ -119,7 +118,12 @@ private extension MainViewController {
         
         signinStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(signupButton.snp.bottom).offset(21.0)
+            $0.top.equalTo(signUpButton.snp.bottom).offset(21.0)
         }
+    }
+    
+    @objc func didTapSignInButton() {
+        let signUpViewController = SignUpEmailViewController()
+        navigationController?.pushViewController(signUpViewController, animated: true)
     }
 }

@@ -9,4 +9,5 @@ import UIKit
 
 extension UIImage {
     static let speechBubble = UIImage(named: "SpeechBubble")
+    static let back = UIImage(systemName: "chevron.backward")
 }
