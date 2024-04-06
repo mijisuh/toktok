@@ -10,18 +10,15 @@ import UIKit
 class StepSlider: UISlider {
     var trackLineHeight: CGFloat = 2.0
     var step: Int = 0
-    var width: CGFloat = 0
 
-    init(step: Int, width: CGFloat) {
+    init(step: Int) {
         super.init(frame: .zero)
         
         self.step = step
-        self.width = width
         
         self.isUserInteractionEnabled = false
-        self.maximumValue = Float(width)
-        self.value = self.maximumValue / 5 * Float(step)
-        self.thumbTintColor = .clear
+        self.value = Float(self.maximumValue / 5.0) * Float(step)
+        self.setThumbImage(UIImage.init(), for: .normal)
     }
     
     required init?(coder: NSCoder) {

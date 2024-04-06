@@ -1,14 +1,13 @@
 //
-//  SignUpEmailViewController.swift
+//  IDStepViewController.swift
 //  TokTok
 //
-//  Created by mijisuh on 2024/04/04.
+//  Created by mijisuh on 2024/04/06.
 //
 
 import UIKit
-import SnapKit
 
-final class SignUpEmailViewController: UIViewController {
+final class IDStepViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
         image: .back,
         style: .plain,
@@ -17,26 +16,25 @@ final class SignUpEmailViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 1, width: view.frame.width - 32)
+        let slider = StepSlider(step: 3)
         return slider
     }()
     
     private lazy var stepLabel: UILabel = {
         let label = UILabel.large
-        label.text = "이메일을 입력해 주세요."
+        label.text = "ID를 입력해 주세요."
         return label
     }()
     
     private lazy var stepDescriptionLabel: UILabel = {
         let label = UILabel.secondary
-        label.text = "입력하신 이메일은 로그인 시 사용됩니다."
+        label.text = "입력하신 ID는 채팅 검색 시 사용됩니다."
         return label
     }()
     
     private lazy var emailTextField: UITextField = {
         let textField = UITextField.rounded
-        textField.placeholder = "이메일"
-        textField.keyboardType = .emailAddress
+        textField.placeholder = "한글, 영문 또는 숫자 포함 5~20자"
         textField.returnKeyType = .done
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.delegate = self
@@ -58,17 +56,17 @@ final class SignUpEmailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
+        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.removeKeyboardNotifications()
         view.endEditing(true)
+        removeKeyboardNotifications()
     }
 }
 
-private extension SignUpEmailViewController {
+private extension IDStepViewController {
     func setupViews() {
         view.backgroundColor = .background
         navigationItem.title = "회원가입"
@@ -111,7 +109,7 @@ private extension SignUpEmailViewController {
     }
     
     @objc func didTapNextButton() {
-        let viewController = SignUpPasswordViewController()
+        let viewController = ProfileImageStepViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -123,9 +121,7 @@ private extension SignUpEmailViewController {
         }
     }
     
-    // 키보드가 나타날 때 코드
     @objc func keyboardWillShow(_ noti: NSNotification) {
-        // 키보드의 높이만큼 화면을 올려준다.
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
@@ -135,10 +131,8 @@ private extension SignUpEmailViewController {
             view.layoutIfNeeded()
         }
     }
-    
-    // 키보드가 사라졌을 때 코드
+
     @objc func keyboardWillHide(_ noti: NSNotification) {
-        // 키보드의 높이만큼 화면을 내려준다.
         nextButton.snp.updateConstraints {
             $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
         }

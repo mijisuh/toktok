@@ -30,7 +30,7 @@ final class MainViewController: UIViewController {
 
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 18.0, weight: .medium),
-            .foregroundColor: UIColor.secondaryLabel,
+            .foregroundColor: UIColor.darkGray,
             .paragraphStyle: paragraphStyle
         ]
 
@@ -56,7 +56,7 @@ final class MainViewController: UIViewController {
     private lazy var signInLabel: UILabel = {
         let label = UILabel()
         label.text = "이미 계정이 있나요? "
-        label.textColor = .tertiaryLabel
+        label.textColor = .secondaryLabel
         label.font = .systemFont(ofSize: 16.0, weight: .medium)
         return label
     }()
@@ -107,23 +107,24 @@ private extension MainViewController {
         
         appDescriptionLabel.snp.makeConstraints {
             $0.leading.equalTo(appNameLabel)
-            $0.top.equalTo(appNameLabel.snp.bottom).offset(16.0)
+            $0.top.equalTo(appNameLabel.snp.bottom).offset(20.0)
         }
         
         signUpButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(margin)
-            $0.top.equalTo(appDescriptionLabel.snp.bottom).offset(72.0)
+            $0.top.equalTo(appDescriptionLabel.snp.bottom).offset(66.0)
             $0.height.equalTo(46.0)
         }
         
         signinStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(signUpButton.snp.bottom).offset(21.0)
+            $0.top.equalTo(signUpButton.snp.bottom).offset(27.0)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24.0)
         }
     }
     
     @objc func didTapSignInButton() {
-        let signUpViewController = SignUpEmailViewController()
+        let signUpViewController = EmailStepViewController()
         navigationController?.pushViewController(signUpViewController, animated: true)
     }
 }

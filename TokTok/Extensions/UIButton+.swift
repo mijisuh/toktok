@@ -19,6 +19,20 @@ extension UIButton {
         return button
     }
     
+    static var link: UIButton {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 12.0)
+        
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = .link?.withConfiguration(imageConfig)
+        configuration.imagePlacement = .trailing
+        configuration.baseForegroundColor = .secondaryLabel
+        configuration.contentInsets = .zero
+        
+        let button = UIButton(configuration: configuration)
+        button.contentHorizontalAlignment = .fill
+        return button
+    }
+    
     func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         UIGraphicsBeginImageContext(CGSize(width: 1.0, height: 1.0))
         guard let context = UIGraphicsGetCurrentContext() else { return }

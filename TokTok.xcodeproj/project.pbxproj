@@ -11,13 +11,17 @@
 		0913CC172BC07F460071CF2D /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC162BC07F460071CF2D /* UILabel+.swift */; };
 		0913CC192BC088DC0071CF2D /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC182BC088DC0071CF2D /* UITextField+.swift */; };
 		0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */; };
-		0913CC1D2BC0A81C0071CF2D /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */; };
+		0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */; };
 		0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1E2BC0AE800071CF2D /* Common.swift */; };
+		093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */; };
+		093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */; };
+		095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05832BC0F2C200BCE946 /* TACStepViewController.swift */; };
+		095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05852BC1350300BCE946 /* SuccessStepViewController.swift */; };
 		09BFECCA2BBEDC4900DBF7F1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECC92BBEDC4900DBF7F1 /* RxCocoa */; };
 		09BFECCC2BBEDC4900DBF7F1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCB2BBEDC4900DBF7F1 /* RxRelay */; };
 		09BFECCE2BBEDC4900DBF7F1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCD2BBEDC4900DBF7F1 /* RxSwift */; };
 		09BFECD12BBEDC5900DBF7F1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECD02BBEDC5900DBF7F1 /* SnapKit */; };
-		09BFECD32BBEE98700DBF7F1 /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */; };
+		09BFECD32BBEE98700DBF7F1 /* EmailStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */; };
 		09F77C152BBEA6E20094CFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */; };
 		09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */; };
 		09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C182BBEA6E20094CFC9 /* MainViewController.swift */; };
@@ -33,9 +37,13 @@
 		0913CC162BC07F460071CF2D /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		0913CC182BC088DC0071CF2D /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
-		0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
+		0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStepViewController.swift; sourceTree = "<group>"; };
 		0913CC1E2BC0AE800071CF2D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
+		093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDStepViewController.swift; sourceTree = "<group>"; };
+		093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageStepViewController.swift; sourceTree = "<group>"; };
+		095F05832BC0F2C200BCE946 /* TACStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACStepViewController.swift; sourceTree = "<group>"; };
+		095F05852BC1350300BCE946 /* SuccessStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStepViewController.swift; sourceTree = "<group>"; };
+		09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStepViewController.swift; sourceTree = "<group>"; };
 		09F77C112BBEA6E20094CFC9 /* TokTok.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokTok.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,8 +83,12 @@
 			isa = PBXGroup;
 			children = (
 				0913CC142BC0608B0071CF2D /* StepSlider.swift */,
-				09BFECD22BBEE98700DBF7F1 /* SignUpEmailViewController.swift */,
-				0913CC1C2BC0A81C0071CF2D /* SignUpPasswordViewController.swift */,
+				09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */,
+				0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */,
+				093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */,
+				093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */,
+				095F05832BC0F2C200BCE946 /* TACStepViewController.swift */,
+				095F05852BC1350300BCE946 /* SuccessStepViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -219,13 +231,17 @@
 				0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */,
 				09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */,
 				0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */,
-				09BFECD32BBEE98700DBF7F1 /* SignUpEmailViewController.swift in Sources */,
+				09BFECD32BBEE98700DBF7F1 /* EmailStepViewController.swift in Sources */,
 				0913CC152BC0608B0071CF2D /* StepSlider.swift in Sources */,
 				09F77C382BBECA580094CFC9 /* UIColor+.swift in Sources */,
+				093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */,
+				095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */,
 				09F77C152BBEA6E20094CFC9 /* AppDelegate.swift in Sources */,
 				09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */,
-				0913CC1D2BC0A81C0071CF2D /* SignUpPasswordViewController.swift in Sources */,
+				095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */,
+				0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */,
 				09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */,
+				093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */,
 				09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
