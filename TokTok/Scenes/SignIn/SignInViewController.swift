@@ -89,7 +89,7 @@ final class SignInViewController: UIViewController {
 private extension SignInViewController {
     func setupViews() {
         view.backgroundColor = .background
-        
+
         navigationItem.title = "로그인"
         navigationItem.hidesBackButton = true
         
