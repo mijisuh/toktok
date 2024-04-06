@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class IDStepViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(

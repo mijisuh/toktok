@@ -15,4 +15,5 @@ extension UIImage {
     static let checked = UIImage(named: "Checked")
     static let link = UIImage(systemName: "chevron.forward")
     static let fireworks = UIImage(named: "Fireworks")
+    static let roundSpeechBubble = UIImage(named: "RoundSpeechBubble")
 }

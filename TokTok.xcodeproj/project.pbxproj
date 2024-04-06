@@ -17,6 +17,7 @@
 		093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */; };
 		095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05832BC0F2C200BCE946 /* TACStepViewController.swift */; };
 		095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05852BC1350300BCE946 /* SuccessStepViewController.swift */; };
+		095F05892BC13FA400BCE946 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05882BC13FA400BCE946 /* SignInViewController.swift */; };
 		09BFECCA2BBEDC4900DBF7F1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECC92BBEDC4900DBF7F1 /* RxCocoa */; };
 		09BFECCC2BBEDC4900DBF7F1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCB2BBEDC4900DBF7F1 /* RxRelay */; };
 		09BFECCE2BBEDC4900DBF7F1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCD2BBEDC4900DBF7F1 /* RxSwift */; };
@@ -43,6 +44,7 @@
 		093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageStepViewController.swift; sourceTree = "<group>"; };
 		095F05832BC0F2C200BCE946 /* TACStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACStepViewController.swift; sourceTree = "<group>"; };
 		095F05852BC1350300BCE946 /* SuccessStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStepViewController.swift; sourceTree = "<group>"; };
+		095F05882BC13FA400BCE946 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStepViewController.swift; sourceTree = "<group>"; };
 		09F77C112BBEA6E20094CFC9 /* TokTok.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokTok.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		095F05872BC13F9100BCE946 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				095F05882BC13FA400BCE946 /* SignInViewController.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		09F77C082BBEA6E20094CFC9 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 			children = (
 				0913CC122BC05D1F0071CF2D /* Main */,
 				0913CC132BC05D270071CF2D /* SignUp */,
+				095F05872BC13F9100BCE946 /* SignIn */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -240,6 +251,7 @@
 				09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */,
 				095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */,
 				0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */,
+				095F05892BC13FA400BCE946 /* SignInViewController.swift in Sources */,
 				09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */,
 				093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */,
 				09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */,

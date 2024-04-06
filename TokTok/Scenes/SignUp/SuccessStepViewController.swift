@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SuccessStepViewController: UIViewController {
     private lazy var imageView: UIImageView = {

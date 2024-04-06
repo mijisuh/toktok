@@ -49,13 +49,13 @@ final class MainViewController: UIViewController {
         let button = UIButton.rounded
         button.setTitle("시작하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
         return button
     }()
     
     private lazy var signInLabel: UILabel = {
         let label = UILabel()
-        label.text = "이미 계정이 있나요? "
+        label.text = "이미 계정이 있나요?"
         label.textColor = .secondaryLabel
         label.font = .systemFont(ofSize: 16.0, weight: .medium)
         return label
@@ -66,6 +66,7 @@ final class MainViewController: UIViewController {
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .medium)
+        button.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
         return button
     }()
     
@@ -102,7 +103,7 @@ private extension MainViewController {
         
         appNameLabel.snp.makeConstraints {
             $0.leading.equalTo(imageView)
-            $0.top.equalTo(imageView.snp.bottom).offset(60.0)
+            $0.top.equalTo(imageView.snp.bottom).offset(40.0)
         }
         
         appDescriptionLabel.snp.makeConstraints {
@@ -112,19 +113,23 @@ private extension MainViewController {
         
         signUpButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(margin)
-            $0.top.equalTo(appDescriptionLabel.snp.bottom).offset(66.0)
+            $0.top.equalTo(appDescriptionLabel.snp.bottom).offset(60.0)
             $0.height.equalTo(46.0)
         }
         
         signinStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(signUpButton.snp.bottom).offset(27.0)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24.0)
+            $0.top.equalTo(signUpButton.snp.bottom).offset(32.0)
         }
     }
     
+    @objc func didTapSignUpButton() {
+        let viewController = EmailStepViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     @objc func didTapSignInButton() {
-        let signUpViewController = EmailStepViewController()
-        navigationController?.pushViewController(signUpViewController, animated: true)
+        let viewController = SignInViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
