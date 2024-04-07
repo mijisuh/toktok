@@ -1,14 +1,13 @@
 //
-//  IDStepViewController.swift
+//  AddChatViewController.swift
 //  TokTok
 //
-//  Created by mijisuh on 2024/04/06.
+//  Created by mijisuh on 2024/04/07.
 //
 
 import UIKit
-import SnapKit
 
-final class IDStepViewController: UIViewController {
+final class AddChatViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
         image: .back,
         style: .plain,
@@ -16,37 +15,33 @@ final class IDStepViewController: UIViewController {
         action: #selector(didTapLeftBarButtonItem)
     )
     
-    private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 3)
-        return slider
-    }()
-    
     private lazy var stepLabel: UILabel = {
         let label = UILabel.large
-        label.text = "ID를 입력해 주세요."
+        label.text = "채팅 상대의\nID를 입력해 주세요."
+        label.numberOfLines = 2
         return label
     }()
     
     private lazy var stepDescriptionLabel: UILabel = {
         let label = UILabel.secondary
-        label.text = "입력하신 ID는 채팅 검색 시 사용됩니다."
+        label.text = "ID를 정확하게 입력해주세요."
         return label
     }()
     
     private lazy var idTextField: UITextField = {
         let textField = UITextField.rounded
-        textField.placeholder = "한글, 영문 또는 숫자 포함 5~20자"
+        textField.placeholder = "ID"
         textField.returnKeyType = .done
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.delegate = self
         return textField
     }()
     
-    private lazy var nextButton: UIButton = {
+    private lazy var confirmButton: UIButton = {
         let button = UIButton.rounded
-        button.setTitle("다음", for: .normal)
+        button.setTitle("확인", for: .normal)
         button.isEnabled = false
-        button.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
         return button
     }()
     
@@ -67,27 +62,21 @@ final class IDStepViewController: UIViewController {
     }
 }
 
-private extension IDStepViewController {
+private extension AddChatViewController {
     func setupViews() {
         view.backgroundColor = .background
-        navigationItem.title = "회원가입"
+        navigationItem.title = "채팅 생성"
         navigationItem.leftBarButtonItem = leftBarButtonItem
 
         [
-            stepSlider,
             stepLabel,
             stepDescriptionLabel,
             idTextField,
-            nextButton
+            confirmButton
         ].forEach { view.addSubview($0) }
         
-        stepSlider.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(12.0)
-            $0.leading.trailing.equalToSuperview().inset(MARGIN)
-        }
-        
         stepLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(104.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(116.0)
             $0.leading.trailing.equalToSuperview().inset(34.0)
         }
         
@@ -102,23 +91,22 @@ private extension IDStepViewController {
             $0.height.equalTo(46.0)
         }
         
-        nextButton.snp.makeConstraints {
+        confirmButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(MARGIN)
             $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
             $0.height.equalTo(46.0)
         }
     }
     
-    @objc func didTapNextButton() {
-        let viewController = ProfileImageStepViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+    @objc func didTapConfirmButton() {
+        
     }
     
     @objc func textFieldDidChange() {
         if let text = idTextField.text, !text.isEmpty {
-            nextButton.isEnabled = true
+            confirmButton.isEnabled = true
         } else {
-            nextButton.isEnabled = false
+            confirmButton.isEnabled = false
         }
     }
     
@@ -126,15 +114,15 @@ private extension IDStepViewController {
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            nextButton.snp.updateConstraints {
+            confirmButton.snp.updateConstraints {
                 $0.bottom.equalToSuperview().inset(keyboardHeight + MARGIN)
             }
             view.layoutIfNeeded()
         }
     }
-
+    
     @objc func keyboardWillHide(_ noti: NSNotification) {
-        nextButton.snp.updateConstraints {
+        confirmButton.snp.updateConstraints {
             $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
         }
         view.layoutIfNeeded()

@@ -1,6 +1,14 @@
 {
   "pins" : [
     {
+      "identity" : "floaty",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kciter/Floaty.git",
+      "state" : {
+        "revision" : "6fab04721056957d6a402f5bb28191640c3bc6d6"
+      }
+    },
+    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/reactivex/rxswift.git",

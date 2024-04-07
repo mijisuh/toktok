@@ -152,7 +152,13 @@ private extension SignInViewController {
     }
     
     @objc func didTapSignInButton() {
-        
+        // UINavigationController에서 모든 뷰 컨트롤러를 pop하여 기존 스택 제거
+        let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+        navigationController?.popToRootViewController(animated: false)
+
+        // 새로운 루트 뷰 컨트롤러 설정
+        let newRootViewController = TabBarController()
+        UIApplication.shared.windows.first?.rootViewController = newRootViewController
     }
     
     @objc func didTapSignUpButton() {
@@ -162,7 +168,6 @@ private extension SignInViewController {
     @objc func keyboardWillShow(_ noti: NSNotification) {
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
             signInView.snp.updateConstraints {
                 $0.centerY.equalToSuperview().offset(-(signInView.frame.maxY - keyboardRectangle.minY))
             }

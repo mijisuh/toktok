@@ -35,7 +35,7 @@ final class ProfileImageStepViewController: UIViewController {
     
     private lazy var profileImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(.profileImage, for: .normal)
+        button.setImage(.addProfileImage, for: .normal)
         button.clipsToBounds = true
         return button
     }()
