@@ -13,6 +13,12 @@
 		0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */; };
 		0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */; };
 		0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1E2BC0AE800071CF2D /* Common.swift */; };
+		092165792BC3C16700EDE67E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165782BC3C16700EDE67E /* ChatViewController.swift */; };
+		0921657D2BC3D09A00EDE67E /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921657C2BC3D09A00EDE67E /* ChatMessageCell.swift */; };
+		0921657F2BC3D15A00EDE67E /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921657E2BC3D15A00EDE67E /* String+.swift */; };
+		092165812BC3D30600EDE67E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165802BC3D30600EDE67E /* UIView+.swift */; };
+		092165852BC3F12800EDE67E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165842BC3F12800EDE67E /* Message.swift */; };
+		092165882BC3F75D00EDE67E /* UIBezierPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165872BC3F75D00EDE67E /* UIBezierPath+.swift */; };
 		093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */; };
 		093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */; };
 		095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05832BC0F2C200BCE946 /* TACStepViewController.swift */; };
@@ -21,7 +27,7 @@
 		095F058B2BC2986F00BCE946 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F058A2BC2986F00BCE946 /* TabBarController.swift */; };
 		095F058E2BC2990700BCE946 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F058D2BC2990700BCE946 /* TabBarItem.swift */; };
 		095F05902BC29D5700BCE946 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F058F2BC29D5700BCE946 /* ChatListViewController.swift */; };
-		095F05932BC2B92800BCE946 /* ChatListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05922BC2B92800BCE946 /* ChatListCollectionViewCell.swift */; };
+		095F05932BC2B92800BCE946 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05922BC2B92800BCE946 /* ChatListCell.swift */; };
 		095F05992BC2C86400BCE946 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05982BC2C86400BCE946 /* Icon.swift */; };
 		095F059C2BC2CB9200BCE946 /* Floaty in Frameworks */ = {isa = PBXBuildFile; productRef = 095F059B2BC2CB9200BCE946 /* Floaty */; };
 		095F059E2BC2CDED00BCE946 /* AddChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F059D2BC2CDED00BCE946 /* AddChatViewController.swift */; };
@@ -47,6 +53,12 @@
 		0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStepViewController.swift; sourceTree = "<group>"; };
 		0913CC1E2BC0AE800071CF2D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		092165782BC3C16700EDE67E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		0921657C2BC3D09A00EDE67E /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
+		0921657E2BC3D15A00EDE67E /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		092165802BC3D30600EDE67E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		092165842BC3F12800EDE67E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		092165872BC3F75D00EDE67E /* UIBezierPath+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+.swift"; sourceTree = "<group>"; };
 		093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDStepViewController.swift; sourceTree = "<group>"; };
 		093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageStepViewController.swift; sourceTree = "<group>"; };
 		095F05832BC0F2C200BCE946 /* TACStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACStepViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +67,7 @@
 		095F058A2BC2986F00BCE946 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		095F058D2BC2990700BCE946 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		095F058F2BC29D5700BCE946 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
-		095F05922BC2B92800BCE946 /* ChatListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCollectionViewCell.swift; sourceTree = "<group>"; };
+		095F05922BC2B92800BCE946 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		095F05982BC2C86400BCE946 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		095F059D2BC2CDED00BCE946 /* AddChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChatViewController.swift; sourceTree = "<group>"; };
 		09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStepViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +121,14 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		092165862BC3F13100EDE67E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				092165842BC3F12800EDE67E /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		095F05872BC13F9100BCE946 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,9 +149,11 @@
 		095F05912BC29D9400BCE946 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				095F05922BC2B92800BCE946 /* ChatListCollectionViewCell.swift */,
+				095F05922BC2B92800BCE946 /* ChatListCell.swift */,
 				095F058F2BC29D5700BCE946 /* ChatListViewController.swift */,
 				095F059D2BC2CDED00BCE946 /* AddChatViewController.swift */,
+				092165782BC3C16700EDE67E /* ChatViewController.swift */,
+				0921657C2BC3D09A00EDE67E /* ChatMessageCell.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -158,6 +180,7 @@
 				09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */,
 				09F77C162BBEA6E20094CFC9 /* SceneDelegate.swift */,
 				0913CC1E2BC0AE800071CF2D /* Common.swift */,
+				092165862BC3F13100EDE67E /* Models */,
 				09F77C362BBEB5640094CFC9 /* Scenes */,
 				09F77C392BBECAAC0094CFC9 /* Extensions */,
 				09F77C1D2BBEA6E50094CFC9 /* Assets.xcassets */,
@@ -183,12 +206,15 @@
 		09F77C392BBECAAC0094CFC9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				092165802BC3D30600EDE67E /* UIView+.swift */,
 				09F77C372BBECA580094CFC9 /* UIColor+.swift */,
 				09F77C3A2BBECE930094CFC9 /* UIButton+.swift */,
 				09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */,
 				0913CC162BC07F460071CF2D /* UILabel+.swift */,
 				0913CC182BC088DC0071CF2D /* UITextField+.swift */,
 				0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */,
+				0921657E2BC3D15A00EDE67E /* String+.swift */,
+				092165872BC3F75D00EDE67E /* UIBezierPath+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -280,11 +306,12 @@
 				095F058E2BC2990700BCE946 /* TabBarItem.swift in Sources */,
 				0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */,
 				09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */,
+				0921657D2BC3D09A00EDE67E /* ChatMessageCell.swift in Sources */,
 				095F05992BC2C86400BCE946 /* Icon.swift in Sources */,
 				0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */,
 				09BFECD32BBEE98700DBF7F1 /* EmailStepViewController.swift in Sources */,
 				095F058B2BC2986F00BCE946 /* TabBarController.swift in Sources */,
-				095F05932BC2B92800BCE946 /* ChatListCollectionViewCell.swift in Sources */,
+				095F05932BC2B92800BCE946 /* ChatListCell.swift in Sources */,
 				0913CC152BC0608B0071CF2D /* StepSlider.swift in Sources */,
 				09F77C382BBECA580094CFC9 /* UIColor+.swift in Sources */,
 				093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */,
@@ -293,11 +320,16 @@
 				09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */,
 				095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */,
 				0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */,
+				092165792BC3C16700EDE67E /* ChatViewController.swift in Sources */,
 				095F05892BC13FA400BCE946 /* SignInViewController.swift in Sources */,
 				09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */,
 				095F05902BC29D5700BCE946 /* ChatListViewController.swift in Sources */,
+				092165812BC3D30600EDE67E /* UIView+.swift in Sources */,
 				093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */,
 				095F059E2BC2CDED00BCE946 /* AddChatViewController.swift in Sources */,
+				092165882BC3F75D00EDE67E /* UIBezierPath+.swift in Sources */,
+				092165852BC3F12800EDE67E /* Message.swift in Sources */,
+				0921657F2BC3D15A00EDE67E /* String+.swift in Sources */,
 				09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

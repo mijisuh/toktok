@@ -20,6 +20,7 @@ enum Icon {
     case plus
     case chat
     case account
+    case send
     
     var image: UIImage? {
         var systemName: String = ""
@@ -39,6 +40,8 @@ enum Icon {
             name = "Fireworks"
         case .profileImage:
             name = "ProfileImage"
+        case .send:
+            name = "PaperplaneFill"
         case .back:
             systemName = "chevron.backward"
         case .link:
@@ -51,7 +54,7 @@ enum Icon {
             systemName = "person.crop.circle"
         }
         
-        return systemName.isEmpty ? UIImage(named: systemName) : UIImage(systemName: name)
+        return systemName.isEmpty ? UIImage(named: name) : UIImage(systemName: systemName)
     }
 }
 

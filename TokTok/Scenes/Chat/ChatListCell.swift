@@ -1,5 +1,5 @@
 //
-//  ChatListCollectionViewCell.swift
+//  ChatListCell.swift
 //  TokTok
 //
 //  Created by mijisuh on 2024/04/07.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class ChatListCollectionViewCell: UICollectionViewCell {
-    static let identifier = "ChatListCollectionViewCell"
+final class ChatListCell: UICollectionViewCell {
+    static let identifier = "ChatListCell"
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .profileImage
+        imageView.layer.cornerRadius = imageView.bounds.width / 2
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -46,7 +47,7 @@ final class ChatListCollectionViewCell: UICollectionViewCell {
     }
 }
 
-private extension ChatListCollectionViewCell {
+private extension ChatListCell {
     func setupViews() {
         let labelStackView = UIStackView(arrangedSubviews: [idLabel, recentMessageLabel])
         labelStackView.axis = .vertical
@@ -59,7 +60,7 @@ private extension ChatListCollectionViewCell {
         ].forEach { addSubview($0) }
         
         profileImageView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(12.0)
+            $0.centerY.equalToSuperview()
             $0.width.equalTo(48.0)
             $0.height.equalTo(48.0)
         }

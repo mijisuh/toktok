@@ -28,11 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.backgroundColor = .systemBackground
         window?.tintColor = .black
         
-        if isAuthUser {
+//        if isAuthUser {
             window?.rootViewController = TabBarController()
-        } else {
-            window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-        }
+//        } else {
+//            window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+//        }
         
         window?.makeKeyAndVisible()
     }

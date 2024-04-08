@@ -67,6 +67,7 @@ private extension AddChatViewController {
         view.backgroundColor = .background
         navigationItem.title = "채팅 생성"
         navigationItem.leftBarButtonItem = leftBarButtonItem
+        navigationController?.navigationBar.prefersLargeTitles = false
 
         [
             stepLabel,
