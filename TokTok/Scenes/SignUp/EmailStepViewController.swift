@@ -68,6 +68,13 @@ final class EmailStepViewController: UIViewController {
     }
 }
 
+extension EmailStepViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 private extension EmailStepViewController {
     func setupViews() {
         view.backgroundColor = .background

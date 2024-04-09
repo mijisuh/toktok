@@ -19,6 +19,7 @@
 		092165812BC3D30600EDE67E /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165802BC3D30600EDE67E /* UIView+.swift */; };
 		092165852BC3F12800EDE67E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165842BC3F12800EDE67E /* Message.swift */; };
 		092165882BC3F75D00EDE67E /* UIBezierPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165872BC3F75D00EDE67E /* UIBezierPath+.swift */; };
+		0921658A2BC5316A00EDE67E /* UITextView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165892BC5316900EDE67E /* UITextView+.swift */; };
 		093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */; };
 		093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */; };
 		095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05832BC0F2C200BCE946 /* TACStepViewController.swift */; };
@@ -59,6 +60,7 @@
 		092165802BC3D30600EDE67E /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		092165842BC3F12800EDE67E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		092165872BC3F75D00EDE67E /* UIBezierPath+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+.swift"; sourceTree = "<group>"; };
+		092165892BC5316900EDE67E /* UITextView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+.swift"; sourceTree = "<group>"; };
 		093235EC2BC0E49300D8CDE8 /* IDStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDStepViewController.swift; sourceTree = "<group>"; };
 		093235EE2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageStepViewController.swift; sourceTree = "<group>"; };
 		095F05832BC0F2C200BCE946 /* TACStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACStepViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				092165802BC3D30600EDE67E /* UIView+.swift */,
+				092165892BC5316900EDE67E /* UITextView+.swift */,
 				09F77C372BBECA580094CFC9 /* UIColor+.swift */,
 				09F77C3A2BBECE930094CFC9 /* UIButton+.swift */,
 				09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */,
@@ -325,6 +328,7 @@
 				09F77C172BBEA6E20094CFC9 /* SceneDelegate.swift in Sources */,
 				095F05902BC29D5700BCE946 /* ChatListViewController.swift in Sources */,
 				092165812BC3D30600EDE67E /* UIView+.swift in Sources */,
+				0921658A2BC5316A00EDE67E /* UITextView+.swift in Sources */,
 				093235EF2BC0E62500D8CDE8 /* ProfileImageStepViewController.swift in Sources */,
 				095F059E2BC2CDED00BCE946 /* AddChatViewController.swift in Sources */,
 				092165882BC3F75D00EDE67E /* UIBezierPath+.swift in Sources */,

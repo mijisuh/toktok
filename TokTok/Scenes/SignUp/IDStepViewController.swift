@@ -67,6 +67,13 @@ final class IDStepViewController: UIViewController {
     }
 }
 
+extension IDStepViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 private extension IDStepViewController {
     func setupViews() {
         view.backgroundColor = .background

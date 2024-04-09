@@ -62,6 +62,13 @@ final class AddChatViewController: UIViewController {
     }
 }
 
+extension AddChatViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 private extension AddChatViewController {
     func setupViews() {
         view.backgroundColor = .background

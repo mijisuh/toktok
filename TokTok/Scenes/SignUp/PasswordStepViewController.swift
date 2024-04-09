@@ -72,6 +72,13 @@ final class PasswordStepViewController: UIViewController {
     }
 }
 
+extension PasswordStepViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 private extension PasswordStepViewController {
     func setupViews() {
         view.backgroundColor = .background

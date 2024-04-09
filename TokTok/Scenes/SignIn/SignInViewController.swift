@@ -86,6 +86,13 @@ final class SignInViewController: UIViewController {
     }
 }
 
+extension SignInViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 private extension SignInViewController {
     func setupViews() {
         view.backgroundColor = .background

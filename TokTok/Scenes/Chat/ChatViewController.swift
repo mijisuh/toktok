@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class ChatViewController: UIViewController {
+    var keyboardHeight: CGFloat = 0.0
+    
     let messages: [Message] = [
         Message(id: "", contents: "상대방의 메시지", time: "오후 12:30", type: .receive),
         Message(id: "", contents: "내 메시지", time: "오후 12:30", type: .send),
@@ -33,6 +35,7 @@ final class ChatViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 12.0, left: MARGIN, bottom: 12.0, right: MARGIN)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: ChatMessageCell.identifier)
@@ -41,10 +44,17 @@ final class ChatViewController: UIViewController {
     
     private lazy var chatTextView: UITextView = {
         let textView = UITextView()
+        textView.text = "메시지를 입력하세요.\nTEST"
+        textView.textColor = .placeholderText
         textView.font = .systemFont(ofSize: 15.0, weight: .regular)
-        textView.layer.cornerRadius = 20.0
-        textView.layer.masksToBounds = false
-        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 9.0, left: 14.0, bottom: 9.0, right: 14.0)
+        textView.layer.cornerRadius = 18.0
+//        textView.sizeToFit()
+//        textView.layer.masksToBounds = false
+        textView.clipsToBounds = true
+        textView.isScrollEnabled = true
+        textView.showsVerticalScrollIndicator = false
+        textView.delegate = self
         return textView
     }()
     
@@ -55,6 +65,16 @@ final class ChatViewController: UIViewController {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var chatStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [chatTextView, sendButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 10.0
+        stackView.backgroundColor = .background
+        stackView.layoutMargins = UIEdgeInsets(top: 10.0, left: MARGIN, bottom: 10.0, right: MARGIN)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
     }()
     
     override func viewDidLoad() {
@@ -88,6 +108,52 @@ extension ChatViewController: UICollectionViewDataSource {
     }
 }
 
+extension ChatViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        guard textView.textColor == .placeholderText else { return }
+        textView.text = nil
+        textView.textColor = .label
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard textView.text.isEmpty else { return }
+        textView.text = "메시지를 입력해주세요."
+        textView.textColor = .placeholderText
+        textView.selectedRange = NSMakeRange(0, 0)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard !textView.text.isEmpty else {
+            textView.text = "메시지를 입력해주세요."
+            textView.textColor = .placeholderText
+            textView.selectedRange = NSMakeRange(0, 0)
+            return
+        }
+        
+        // placeHolder인데 텍스트가 들어온 경우(빈 문자열에서 처음 문자열이 들어온 경우)
+        if textView.textColor == .placeholderText {
+            textView.text = String(textView.text.first ?? " ")
+            textView.textColor = .label
+        }
+        
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        var estimatedSizeHeight = min(max(textView.sizeThatFits(size).height + 18.0, 56.0), 120.0)
+        
+        if estimatedSizeHeight == 120.0 {
+            chatTextView.scrollToBottom()
+        }
+        
+        collectionView.snp.updateConstraints {
+            $0.bottom.equalToSuperview().inset(keyboardHeight + estimatedSizeHeight)
+        }
+        
+        chatStackView.snp.updateConstraints {
+            $0.height.equalTo(estimatedSizeHeight)
+            $0.bottom.equalToSuperview().inset(keyboardHeight)
+        }
+    }
+}
+
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages[indexPath.row]
@@ -103,14 +169,6 @@ private extension ChatViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.title = "ID"
         navigationController?.navigationBar.prefersLargeTitles = false
-        
-        let chatStackView = UIStackView(arrangedSubviews: [chatTextView, sendButton])
-        chatStackView.axis = .horizontal
-        chatStackView.spacing = 10.0
-        chatStackView.distribution = .fillProportionally
-        chatStackView.backgroundColor = .background
-        chatStackView.layoutMargins = UIEdgeInsets(top: 10.0, left: MARGIN, bottom: 10.0, right: MARGIN)
-        chatStackView.isLayoutMarginsRelativeArrangement = true
 
         [
             collectionView,
@@ -129,24 +187,55 @@ private extension ChatViewController {
     }
     
     @objc func didTapSendButton() {
-        
+        chatTextView.resignFirstResponder()
     }
 
     @objc func keyboardWillShow(_ noti: NSNotification) {
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
+            
+            self.keyboardHeight = keyboardHeight
+            
+            let size = CGSize(width: view.frame.width, height: .infinity)
+            let estimatedSizeHeight = max(chatTextView.sizeThatFits(size).height + 18.0, 56.0)
+            
             collectionView.snp.updateConstraints {
-                $0.bottom.equalToSuperview().inset(keyboardHeight)
+                $0.bottom.equalToSuperview().inset(keyboardHeight + estimatedSizeHeight)
             }
+            
+            chatStackView.snp.updateConstraints {
+                $0.bottom.equalToSuperview().inset(keyboardHeight)
+                $0.height.equalTo(estimatedSizeHeight)
+            }
+            
             view.layoutIfNeeded()
+            
+            scrollToBottom()
         }
     }
     
     @objc func keyboardWillHide(_ noti: NSNotification) {
         collectionView.snp.updateConstraints {
-            $0.bottom.equalToSuperview().inset(BOTTOM)
+            $0.bottom.equalToSuperview().inset(BOTTOM + 56.0)
         }
+        
+        chatStackView.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(BOTTOM + 56.0)
+        }
+        
         view.layoutIfNeeded()
+        
+        chatTextView.scrollToTop()
+    }
+    
+    func scrollToBottom() {
+        guard collectionView.numberOfSections > 0 else { return }
+        let indexPath = IndexPath(
+            item: collectionView.numberOfItems(inSection: collectionView.numberOfSections - 1) - 1,
+            section: collectionView.numberOfSections - 1
+        )
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
     }
 }
