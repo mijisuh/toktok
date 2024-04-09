@@ -11,6 +11,8 @@ import SnapKit
 final class ChatViewController: UIViewController {
     var keyboardHeight: CGFloat = 0.0
     
+    var chatMessage = "" // 키보드가 내려간 경우 chatTextView에 한 줄만 보이게 하기 위함
+    
     let messages: [Message] = [
         Message(id: "", contents: "상대방의 메시지", time: "오후 12:30", type: .receive),
         Message(id: "", contents: "내 메시지", time: "오후 12:30", type: .send),
@@ -44,14 +46,12 @@ final class ChatViewController: UIViewController {
     
     private lazy var chatTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "메시지를 입력하세요.\nTEST"
+        textView.text = "메시지를 입력하세요."
         textView.textColor = .placeholderText
         textView.font = .systemFont(ofSize: 15.0, weight: .regular)
         textView.textContainerInset = UIEdgeInsets(top: 9.0, left: 14.0, bottom: 9.0, right: 14.0)
         textView.layer.cornerRadius = 18.0
-//        textView.sizeToFit()
-//        textView.layer.masksToBounds = false
-        textView.clipsToBounds = true
+        textView.sizeToFit()
         textView.isScrollEnabled = true
         textView.showsVerticalScrollIndicator = false
         textView.delegate = self
@@ -110,23 +110,26 @@ extension ChatViewController: UICollectionViewDataSource {
 
 extension ChatViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = chatMessage
+        textView.scrollToBottom()
+        
         guard textView.textColor == .placeholderText else { return }
         textView.text = nil
         textView.textColor = .label
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        textView.text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines) // 공백 삭제
+        
+        chatMessage = textView.text
+        
         guard textView.text.isEmpty else { return }
-        textView.text = "메시지를 입력해주세요."
-        textView.textColor = .placeholderText
-        textView.selectedRange = NSMakeRange(0, 0)
+        setPlaceHolder(textView)
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         guard !textView.text.isEmpty else {
-            textView.text = "메시지를 입력해주세요."
-            textView.textColor = .placeholderText
-            textView.selectedRange = NSMakeRange(0, 0)
+            setPlaceHolder(textView)
             return
         }
         
@@ -136,10 +139,13 @@ extension ChatViewController: UITextViewDelegate {
             textView.textColor = .label
         }
         
-        let size = CGSize(width: view.frame.width, height: .infinity)
-        var estimatedSizeHeight = min(max(textView.sizeThatFits(size).height + 18.0, 56.0), 120.0)
+        chatMessage = textView.text
         
-        if estimatedSizeHeight == 120.0 {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        var estimatedSizeHeight = max(textView.sizeThatFits(size).height + 18.0, 56.0)
+        
+        if estimatedSizeHeight > 100.0 {
+            estimatedSizeHeight = 100.0
             chatTextView.scrollToBottom()
         }
         
@@ -151,6 +157,20 @@ extension ChatViewController: UITextViewDelegate {
             $0.height.equalTo(estimatedSizeHeight)
             $0.bottom.equalToSuperview().inset(keyboardHeight)
         }
+        
+        view.layoutIfNeeded()
+        
+        scrollToBottom(animated: true)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return true
+    }
+    
+    func setPlaceHolder(_ textView: UITextView) {
+        textView.text = "메시지를 입력해주세요."
+        textView.textColor = .placeholderText
+        textView.selectedRange = NSMakeRange(0, 0)
     }
 }
 
@@ -169,6 +189,10 @@ private extension ChatViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.title = "ID"
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = UIColor.clear
 
         [
             collectionView,
@@ -198,7 +222,16 @@ private extension ChatViewController {
             self.keyboardHeight = keyboardHeight
             
             let size = CGSize(width: view.frame.width, height: .infinity)
-            let estimatedSizeHeight = max(chatTextView.sizeThatFits(size).height + 18.0, 56.0)
+            var estimatedSizeHeight = min(max(chatTextView.sizeThatFits(size).height + 18.0, 56.0), 100.0)
+            
+            collectionView.snp.updateConstraints {
+                $0.bottom.equalToSuperview().inset(keyboardHeight + estimatedSizeHeight)
+            }
+            
+            chatStackView.snp.updateConstraints {
+                $0.height.equalTo(estimatedSizeHeight)
+                $0.bottom.equalToSuperview().inset(keyboardHeight)
+            }
             
             collectionView.snp.updateConstraints {
                 $0.bottom.equalToSuperview().inset(keyboardHeight + estimatedSizeHeight)
@@ -211,11 +244,13 @@ private extension ChatViewController {
             
             view.layoutIfNeeded()
             
-            scrollToBottom()
+            scrollToBottom(animated: false)
         }
     }
     
     @objc func keyboardWillHide(_ noti: NSNotification) {
+        chatTextView.text = String(chatTextView.text.split(separator: "\n").first ?? "")
+        
         collectionView.snp.updateConstraints {
             $0.bottom.equalToSuperview().inset(BOTTOM + 56.0)
         }
@@ -226,16 +261,14 @@ private extension ChatViewController {
         }
         
         view.layoutIfNeeded()
-        
-        chatTextView.scrollToTop()
     }
     
-    func scrollToBottom() {
+    func scrollToBottom(animated: Bool) {
         guard collectionView.numberOfSections > 0 else { return }
         let indexPath = IndexPath(
             item: collectionView.numberOfItems(inSection: collectionView.numberOfSections - 1) - 1,
             section: collectionView.numberOfSections - 1
         )
-        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
     }
 }
