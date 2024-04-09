@@ -20,8 +20,8 @@ enum TabBarItem: CaseIterable {
     
     var icon: UIImage? {
         switch self {
-        case .chat: return .chat
-        case .account: return .account
+        case .chat: return Icon.chat.image
+        case .account: return Icon.account.image
         }
     }
     

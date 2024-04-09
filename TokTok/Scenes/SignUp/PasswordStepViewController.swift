@@ -10,7 +10,7 @@ import SnapKit
 
 final class PasswordStepViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
-        image: .back,
+        image: Icon.back.image,
         style: .plain,
         target: self,
         action: #selector(didTapLeftBarButtonItem)
@@ -69,6 +69,10 @@ final class PasswordStepViewController: UIViewController {
         super.viewWillDisappear(animated)
         view.endEditing(true)
         removeKeyboardNotifications()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 

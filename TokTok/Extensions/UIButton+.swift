@@ -23,7 +23,7 @@ extension UIButton {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 12.0)
         
         var configuration = UIButton.Configuration.plain()
-        configuration.image = .link?.withConfiguration(imageConfig)
+        configuration.image = Icon.link.image?.withConfiguration(imageConfig)
         configuration.imagePlacement = .trailing
         configuration.baseForegroundColor = .secondaryLabel
         configuration.contentInsets = .zero

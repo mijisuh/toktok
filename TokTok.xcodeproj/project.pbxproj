@@ -44,7 +44,6 @@
 		09F77C212BBEA6E50094CFC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F77C1F2BBEA6E50094CFC9 /* LaunchScreen.storyboard */; };
 		09F77C382BBECA580094CFC9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C372BBECA580094CFC9 /* UIColor+.swift */; };
 		09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C3A2BBECE930094CFC9 /* UIButton+.swift */; };
-		09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +81,6 @@
 		09F77C222BBEA6E50094CFC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09F77C372BBECA580094CFC9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		09F77C3A2BBECE930094CFC9 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +210,6 @@
 				092165892BC5316900EDE67E /* UITextView+.swift */,
 				09F77C372BBECA580094CFC9 /* UIColor+.swift */,
 				09F77C3A2BBECE930094CFC9 /* UIButton+.swift */,
-				09F77C3C2BBED0FB0094CFC9 /* UIImage+.swift */,
 				0913CC162BC07F460071CF2D /* UILabel+.swift */,
 				0913CC182BC088DC0071CF2D /* UITextField+.swift */,
 				0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */,
@@ -320,7 +317,6 @@
 				093235ED2BC0E49300D8CDE8 /* IDStepViewController.swift in Sources */,
 				095F05842BC0F2C200BCE946 /* TACStepViewController.swift in Sources */,
 				09F77C152BBEA6E20094CFC9 /* AppDelegate.swift in Sources */,
-				09F77C3D2BBED0FB0094CFC9 /* UIImage+.swift in Sources */,
 				095F05862BC1350300BCE946 /* SuccessStepViewController.swift in Sources */,
 				0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */,
 				092165792BC3C16700EDE67E /* ChatViewController.swift in Sources */,

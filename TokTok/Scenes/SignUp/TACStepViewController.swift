@@ -11,8 +11,8 @@ final class TACStepViewController: UIViewController {
     private var isChecked: Bool = false {
         willSet {
             checkButton.configuration?.image = newValue
-            ? .checked
-            : .unchecked
+            ? Icon.checked.image
+            : Icon.unchecked.image
             
             checkButton.configuration?.baseBackgroundColor = newValue
             ? .secondarySystemFill.withAlphaComponent(1.0)
@@ -21,7 +21,7 @@ final class TACStepViewController: UIViewController {
     }
     
     private lazy var leftBarButtonItem = UIBarButtonItem(
-        image: .back,
+        image: Icon.back.image,
         style: .plain,
         target: self,
         action: #selector(didTapLeftBarButtonItem)
@@ -53,7 +53,7 @@ final class TACStepViewController: UIViewController {
         attText.foregroundColor = .black
         configuration.attributedTitle = attText
 
-        configuration.image = .unchecked
+        configuration.image = Icon.unchecked.image
         configuration.imagePlacement = .leading
         configuration.imagePadding = 8.0
         

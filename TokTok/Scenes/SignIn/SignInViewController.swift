@@ -21,7 +21,7 @@ final class SignInViewController: UIViewController {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .roundSpeechBubble
+        imageView.image = Icon.roundSpeechBubble.image
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -83,6 +83,10 @@ final class SignInViewController: UIViewController {
         super.viewWillDisappear(animated)
         view.endEditing(true)
         removeKeyboardNotifications()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 

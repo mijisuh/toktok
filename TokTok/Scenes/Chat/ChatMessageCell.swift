@@ -12,7 +12,7 @@ final class ChatMessageCell: UICollectionViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .profileImage
+        imageView.image = Icon.profileImage.image
         imageView.layer.cornerRadius = imageView.bounds.width / 2
         imageView.clipsToBounds = true
         return imageView
@@ -38,10 +38,10 @@ final class ChatMessageCell: UICollectionViewCell {
     }()
     
     func setup(_ message: Message) {
-        setupViews(message)
-        
         messageTextView.text = message.contents
         timeLabel.text = message.time
+        
+        setupViews(message)
     }
 }
 
@@ -52,12 +52,11 @@ private extension ChatMessageCell {
             messageTextView,
             timeLabel
         ].forEach { addSubview($0) }
-        
+
         if message.type == .receive {
             profileImageView.snp.makeConstraints {
                 $0.top.equalToSuperview()
-                $0.width.equalTo(36.0)
-                $0.height.equalTo(36.0)
+                $0.width.height.equalTo(36.0)
             }
             
             messageTextView.snp.makeConstraints {
@@ -71,10 +70,14 @@ private extension ChatMessageCell {
                 $0.leading.equalTo(messageTextView.snp.trailing).offset(6.0)
                 $0.bottom.equalTo(messageTextView)
             }
+            
+            layoutIfNeeded()
+            
+            messageTextView.applyRadiusMaskFor(topLeft: 2.0, bottomLeft: 12.0, bottomRight: 12.0, topRight: 12.0)
         } else {
             profileImageView.isHidden = true
-            messageTextView.textColor = .label
-            messageTextView.backgroundColor = .primary
+            messageTextView.textColor = .white
+            messageTextView.backgroundColor = .highlighted
             
             messageTextView.snp.makeConstraints {
                 $0.top.trailing.equalToSuperview()
@@ -86,6 +89,10 @@ private extension ChatMessageCell {
                 $0.trailing.equalTo(messageTextView.snp.leading).offset(-6.0)
                 $0.bottom.equalTo(messageTextView)
             }
+            
+            layoutIfNeeded()
+
+            messageTextView.applyRadiusMaskFor(topLeft: 12.0, bottomLeft: 12.0, bottomRight: 2.0, topRight: 12.0)
         }
     }
 }

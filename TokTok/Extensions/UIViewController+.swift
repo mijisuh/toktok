@@ -12,10 +12,6 @@ extension UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
     // 노티피케이션을 추가하는 메서드
     func addKeyboardNotifications(_ keyboardWillShow: Selector, _ keyboardWillHide: Selector) {
         // 키보드가 나타날 때 앱에게 알리는 메서드 추가

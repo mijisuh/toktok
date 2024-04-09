@@ -24,7 +24,7 @@ final class ChatViewController: UIViewController {
     ]
     
     private lazy var leftBarButtonItem = UIBarButtonItem(
-        image: .back,
+        image: Icon.back.image,
         style: .plain,
         target: self,
         action: #selector(didTapLeftBarButtonItem)
@@ -34,13 +34,17 @@ final class ChatViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16.0
-        layout.sectionInset = UIEdgeInsets(top: 12.0, left: MARGIN, bottom: 12.0, right: MARGIN)
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: MARGIN, bottom: 12.0, right: MARGIN)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: ChatMessageCell.identifier)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
+        collectionView.addGestureRecognizer(tapGesture)
+        
         return collectionView
     }()
     
@@ -52,6 +56,7 @@ final class ChatViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsets(top: 9.0, left: 14.0, bottom: 9.0, right: 14.0)
         textView.layer.cornerRadius = 18.0
         textView.sizeToFit()
+        textView.bounces = false
         textView.isScrollEnabled = true
         textView.showsVerticalScrollIndicator = false
         textView.delegate = self
@@ -71,7 +76,7 @@ final class ChatViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [chatTextView, sendButton])
         stackView.axis = .horizontal
         stackView.spacing = 10.0
-        stackView.backgroundColor = .background
+        stackView.backgroundColor = .secondarySystemFill
         stackView.layoutMargins = UIEdgeInsets(top: 10.0, left: MARGIN, bottom: 10.0, right: MARGIN)
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
@@ -189,11 +194,11 @@ private extension ChatViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem
         navigationItem.title = "ID"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = UIColor.clear
-
+        let navigationBackgroundView = navigationController?.navigationBar.subviews.first
+        navigationBackgroundView?.alpha = 0.7
+        
         [
             collectionView,
             chatStackView
@@ -208,6 +213,8 @@ private extension ChatViewController {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(BOTTOM + 56.0)
         }
+        
+        scrollToBottom(animated: false)
     }
     
     @objc func didTapSendButton() {
@@ -222,7 +229,7 @@ private extension ChatViewController {
             self.keyboardHeight = keyboardHeight
             
             let size = CGSize(width: view.frame.width, height: .infinity)
-            var estimatedSizeHeight = min(max(chatTextView.sizeThatFits(size).height + 18.0, 56.0), 100.0)
+            let estimatedSizeHeight = min(max(chatTextView.sizeThatFits(size).height + 18.0, 56.0), 100.0)
             
             collectionView.snp.updateConstraints {
                 $0.bottom.equalToSuperview().inset(keyboardHeight + estimatedSizeHeight)
@@ -270,5 +277,9 @@ private extension ChatViewController {
             section: collectionView.numberOfSections - 1
         )
         collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+    }
+    
+    @objc func tapHandler() {
+        self.view.endEditing(true)
     }
 }

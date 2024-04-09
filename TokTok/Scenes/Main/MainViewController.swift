@@ -11,7 +11,7 @@ import SnapKit
 final class MainViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .speechBubble
+        imageView.image = Icon.speechBubble.image
         imageView.clipsToBounds = true
         return imageView
     }()

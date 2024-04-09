@@ -9,7 +9,7 @@ import UIKit
 
 final class AddChatViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
-        image: .back,
+        image: Icon.back.image,
         style: .plain,
         target: self,
         action: #selector(didTapLeftBarButtonItem)
@@ -59,6 +59,10 @@ final class AddChatViewController: UIViewController {
         super.viewWillDisappear(animated)
         view.endEditing(true)
         removeKeyboardNotifications()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 

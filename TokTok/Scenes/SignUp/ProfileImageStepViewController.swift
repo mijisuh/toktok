@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProfileImageStepViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
-        image: .back,
+        image: Icon.back.image,
         style: .plain,
         target: self,
         action: #selector(didTapLeftBarButtonItem)
@@ -35,7 +35,7 @@ final class ProfileImageStepViewController: UIViewController {
     
     private lazy var profileImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(.addProfileImage, for: .normal)
+        button.setImage(Icon.addProfileImage.image, for: .normal)
         button.clipsToBounds = true
         return button
     }()

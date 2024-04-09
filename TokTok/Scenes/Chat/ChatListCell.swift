@@ -12,7 +12,7 @@ final class ChatListCell: UICollectionViewCell {
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .profileImage
+        imageView.image = Icon.profileImage.image
         imageView.layer.cornerRadius = imageView.bounds.width / 2
         imageView.clipsToBounds = true
         return imageView

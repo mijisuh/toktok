@@ -11,7 +11,7 @@ import SnapKit
 final class SuccessStepViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = .fireworks
+        imageView.image = Icon.fireworks.image
         imageView.clipsToBounds = true
         return imageView
     }()
