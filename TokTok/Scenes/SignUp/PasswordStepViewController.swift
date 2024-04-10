@@ -17,7 +17,7 @@ final class PasswordStepViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 2)
+        let slider = StepSlider(step: 2, total: 5)
         return slider
     }()
     

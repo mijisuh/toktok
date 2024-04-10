@@ -8,6 +8,11 @@
 import UIKit
 
 extension UIView {
+    enum Direction {
+        case horizontal
+        case vertical
+    }
+    
     func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
         clipsToBounds = true
         layer.cornerRadius = cornerRadius

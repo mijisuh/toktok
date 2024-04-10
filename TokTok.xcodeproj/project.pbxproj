@@ -13,6 +13,10 @@
 		0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */; };
 		0913CC1D2BC0A81C0071CF2D /* PasswordStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */; };
 		0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913CC1E2BC0AE800071CF2D /* Common.swift */; };
+		091E42902BC675F60084ECA8 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091E428F2BC675F50084ECA8 /* AccountViewController.swift */; };
+		091E42932BC68A0C0084ECA8 /* UpdateIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091E42922BC68A0C0084ECA8 /* UpdateIDViewController.swift */; };
+		091E42952BC68CD20084ECA8 /* CurrentPasswordStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091E42942BC68CD20084ECA8 /* CurrentPasswordStepViewController.swift */; };
+		091E42972BC68E890084ECA8 /* UpdatePasswordStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091E42962BC68E890084ECA8 /* UpdatePasswordStepViewController.swift */; };
 		092165792BC3C16700EDE67E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092165782BC3C16700EDE67E /* ChatViewController.swift */; };
 		0921657D2BC3D09A00EDE67E /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921657C2BC3D09A00EDE67E /* ChatMessageCell.swift */; };
 		0921657F2BC3D15A00EDE67E /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921657E2BC3D15A00EDE67E /* String+.swift */; };
@@ -53,6 +57,10 @@
 		0913CC1A2BC0A5280071CF2D /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		0913CC1C2BC0A81C0071CF2D /* PasswordStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStepViewController.swift; sourceTree = "<group>"; };
 		0913CC1E2BC0AE800071CF2D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		091E428F2BC675F50084ECA8 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		091E42922BC68A0C0084ECA8 /* UpdateIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIDViewController.swift; sourceTree = "<group>"; };
+		091E42942BC68CD20084ECA8 /* CurrentPasswordStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPasswordStepViewController.swift; sourceTree = "<group>"; };
+		091E42962BC68E890084ECA8 /* UpdatePasswordStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordStepViewController.swift; sourceTree = "<group>"; };
 		092165782BC3C16700EDE67E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0921657C2BC3D09A00EDE67E /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		0921657E2BC3D15A00EDE67E /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -119,6 +127,17 @@
 				095F05852BC1350300BCE946 /* SuccessStepViewController.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		091E42912BC675FB0084ECA8 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				091E428F2BC675F50084ECA8 /* AccountViewController.swift */,
+				091E42922BC68A0C0084ECA8 /* UpdateIDViewController.swift */,
+				091E42942BC68CD20084ECA8 /* CurrentPasswordStepViewController.swift */,
+				091E42962BC68E890084ECA8 /* UpdatePasswordStepViewController.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		092165862BC3F13100EDE67E /* Models */ = {
@@ -198,6 +217,7 @@
 				095F05872BC13F9100BCE946 /* SignIn */,
 				095F058C2BC2987300BCE946 /* TabBar */,
 				095F05912BC29D9400BCE946 /* Chat */,
+				091E42912BC675FB0084ECA8 /* Account */,
 				095F05982BC2C86400BCE946 /* Icon.swift */,
 			);
 			path = Scenes;
@@ -307,7 +327,10 @@
 				0913CC1F2BC0AE800071CF2D /* Common.swift in Sources */,
 				09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */,
 				0921657D2BC3D09A00EDE67E /* ChatMessageCell.swift in Sources */,
+				091E42932BC68A0C0084ECA8 /* UpdateIDViewController.swift in Sources */,
 				095F05992BC2C86400BCE946 /* Icon.swift in Sources */,
+				091E42972BC68E890084ECA8 /* UpdatePasswordStepViewController.swift in Sources */,
+				091E42902BC675F60084ECA8 /* AccountViewController.swift in Sources */,
 				0913CC1B2BC0A5280071CF2D /* UIViewController+.swift in Sources */,
 				09BFECD32BBEE98700DBF7F1 /* EmailStepViewController.swift in Sources */,
 				095F058B2BC2986F00BCE946 /* TabBarController.swift in Sources */,
@@ -331,6 +354,7 @@
 				092165852BC3F12800EDE67E /* Message.swift in Sources */,
 				0921657F2BC3D15A00EDE67E /* String+.swift in Sources */,
 				09F77C3B2BBECE930094CFC9 /* UIButton+.swift in Sources */,
+				091E42952BC68CD20084ECA8 /* CurrentPasswordStepViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

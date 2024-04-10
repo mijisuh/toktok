@@ -17,7 +17,7 @@ final class EmailStepViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 1)
+        let slider = StepSlider(step: 1, total: 5)
         return slider
     }()
     

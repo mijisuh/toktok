@@ -28,7 +28,7 @@ final class TACStepViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 5)
+        let slider = StepSlider(step: 5, total: 5)
         return slider
     }()
     

@@ -17,7 +17,7 @@ final class ProfileImageStepViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 4)
+        let slider = StepSlider(step: 4, total: 5)
         return slider
     }()
     

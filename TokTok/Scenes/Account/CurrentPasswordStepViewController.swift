@@ -1,14 +1,13 @@
 //
-//  IDStepViewController.swift
+//  CurrentPasswordStepViewController.swift
 //  TokTok
 //
-//  Created by mijisuh on 2024/04/06.
+//  Created by mijisuh on 2024/04/10.
 //
 
 import UIKit
-import SnapKit
 
-final class IDStepViewController: UIViewController {
+final class CurrentPasswordStepViewController: UIViewController {
     private lazy var leftBarButtonItem = UIBarButtonItem(
         image: Icon.back.image,
         style: .plain,
@@ -17,27 +16,22 @@ final class IDStepViewController: UIViewController {
     )
     
     private lazy var stepSlider: StepSlider = {
-        let slider = StepSlider(step: 3, total: 5)
+        let slider = StepSlider(step: 1, total: 2)
         return slider
     }()
     
     private lazy var stepLabel: UILabel = {
         let label = UILabel.large
-        label.text = "ID를 입력해 주세요."
+        label.text = "현재 비밀번호를 입력해 주세요."
         return label
     }()
     
-    private lazy var stepDescriptionLabel: UILabel = {
-        let label = UILabel.secondary
-        label.text = "입력하신 ID는 채팅 검색 시 사용됩니다."
-        return label
-    }()
-    
-    private lazy var idTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField.rounded
-        textField.placeholder = "한글, 영문 또는 숫자 포함 5~20자"
+        textField.placeholder = "현재 비밀번호"
+        textField.isSecureTextEntry = true
         textField.returnKeyType = .done
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(passwordTextFieldDidChange), for: .editingChanged)
         textField.delegate = self
         return textField
     }()
@@ -65,26 +59,29 @@ final class IDStepViewController: UIViewController {
         view.endEditing(true)
         removeKeyboardNotifications()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
-extension IDStepViewController: UITextFieldDelegate {
+extension CurrentPasswordStepViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
 
-private extension IDStepViewController {
+private extension CurrentPasswordStepViewController {
     func setupViews() {
-        view.backgroundColor = .background
-        navigationItem.title = "회원가입"
+        view.backgroundColor = .systemBackground
+        navigationItem.title = "비밀번호 변경"
         navigationItem.leftBarButtonItem = leftBarButtonItem
 
         [
             stepSlider,
             stepLabel,
-            stepDescriptionLabel,
-            idTextField,
+            passwordTextField,
             nextButton
         ].forEach { view.addSubview($0) }
         
@@ -98,14 +95,9 @@ private extension IDStepViewController {
             $0.leading.trailing.equalToSuperview().inset(34.0)
         }
         
-        stepDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(stepLabel.snp.bottom).offset(14.0)
+        passwordTextField.snp.makeConstraints {
+            $0.top.equalTo(stepLabel.snp.bottom).offset(36.0)
             $0.leading.trailing.equalTo(stepLabel)
-        }
-        
-        idTextField.snp.makeConstraints {
-            $0.top.equalTo(stepDescriptionLabel.snp.bottom).offset(36.0)
-            $0.leading.trailing.equalTo(stepDescriptionLabel)
             $0.height.equalTo(46.0)
         }
         
@@ -117,12 +109,12 @@ private extension IDStepViewController {
     }
     
     @objc func didTapNextButton() {
-        let viewController = ProfileImageStepViewController()
+        let viewController = UpdatePasswordStepViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @objc func textFieldDidChange() {
-        if let text = idTextField.text, !text.isEmpty {
+    @objc func passwordTextFieldDidChange() {
+        if let text = passwordTextField.text, !text.isEmpty {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -139,7 +131,7 @@ private extension IDStepViewController {
             view.layoutIfNeeded()
         }
     }
-
+    
     @objc func keyboardWillHide(_ noti: NSNotification) {
         nextButton.snp.updateConstraints {
             $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
