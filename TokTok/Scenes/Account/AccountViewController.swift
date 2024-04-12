@@ -183,6 +183,12 @@ private extension AccountViewController {
     }
     
     @objc func didTapSignOutButton() {
-        
+        // UINavigationController에서 모든 뷰 컨트롤러를 pop하여 기존 스택 제거
+        let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+        navigationController?.popToRootViewController(animated: false)
+
+        // 새로운 루트 뷰 컨트롤러 설정
+        let newRootViewController = UINavigationController(rootViewController:MainViewController())
+        UIApplication.shared.windows.first?.rootViewController = newRootViewController
     }
 }

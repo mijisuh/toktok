@@ -111,7 +111,7 @@ private extension AddChatViewController {
     }
     
     @objc func didTapConfirmButton() {
-        
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func textFieldDidChange() {

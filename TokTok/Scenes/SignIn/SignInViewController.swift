@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class SignInViewController: UIViewController {
+    private var isKeyboardShowed = false
     private var signInView: UIView = UIView()
     
     private lazy var appNameLabel: UILabel = {
@@ -168,7 +169,7 @@ private extension SignInViewController {
         navigationController?.popToRootViewController(animated: false)
 
         // 새로운 루트 뷰 컨트롤러 설정
-        let newRootViewController = TabBarController()
+        let newRootViewController = UINavigationController(rootViewController: TabBarController())
         UIApplication.shared.windows.first?.rootViewController = newRootViewController
     }
     
@@ -177,12 +178,14 @@ private extension SignInViewController {
     }
     
     @objc func keyboardWillShow(_ noti: NSNotification) {
-        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if !isKeyboardShowed,
+           let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             signInView.snp.updateConstraints {
                 $0.centerY.equalToSuperview().offset(-(signInView.frame.maxY - keyboardRectangle.minY))
             }
             view.layoutIfNeeded()
+            isKeyboardShowed = true
         }
     }
     
@@ -191,5 +194,6 @@ private extension SignInViewController {
             $0.centerY.equalToSuperview()
         }
         view.layoutIfNeeded()
+        isKeyboardShowed = false
     }
 }
