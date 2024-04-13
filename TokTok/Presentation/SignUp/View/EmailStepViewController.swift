@@ -7,8 +7,13 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class EmailStepViewController: UIViewController {
+    private let viewModel = SignUpViewModel()
+    private let disposeBag = DisposeBag()
+    
     private lazy var leftBarButtonItem = UIBarButtonItem(
         image: Icon.back.image,
         style: .plain,
@@ -38,8 +43,6 @@ final class EmailStepViewController: UIViewController {
         textField.placeholder = "이메일"
         textField.keyboardType = .emailAddress
         textField.returnKeyType = .done
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        textField.delegate = self
         return textField
     }()
     
@@ -47,35 +50,22 @@ final class EmailStepViewController: UIViewController {
         let button = UIButton.rounded
         button.setTitle("다음", for: .normal)
         button.isEnabled = false
-        button.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
+        bind()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
-        removeKeyboardNotifications()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-}
-
-extension EmailStepViewController: UITextFieldDelegate {
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }
 
@@ -122,38 +112,80 @@ private extension EmailStepViewController {
         }
     }
     
-    @objc func didTapNextButton() {
-        let viewController = PasswordStepViewController()
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @objc func textFieldDidChange() {
-        if let text = emailTextField.text, !text.isEmpty {
-            nextButton.isEnabled = true
-        } else {
-            nextButton.isEnabled = false
-        }
-    }
-    
-    // 키보드가 나타날 때 코드
-    @objc func keyboardWillShow(_ noti: NSNotification) {
-        // 키보드의 높이만큼 화면을 올려준다.
-        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            nextButton.snp.updateConstraints {
-                $0.bottom.equalToSuperview().inset(keyboardHeight + MARGIN)
+    func bind() {
+        // 키보드 높이를 Observable로 만듦
+        let keyboardHeight = Observable
+            .from([NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+                .map { notification -> CGFloat in
+                    (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                },
+                   NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+                .map { _ -> CGFloat in 0 }])
+            .merge()
+        
+        // 키보드 높이가 변경될 때
+        keyboardHeight
+            .subscribe { [weak self] height in
+                self?.nextButton.snp.updateConstraints {
+                    $0.bottom.equalToSuperview().inset(height + MARGIN)
+                }
+                self?.view.layoutIfNeeded()
             }
-            view.layoutIfNeeded()
-        }
-    }
-    
-    // 키보드가 사라졌을 때 코드
-    @objc func keyboardWillHide(_ noti: NSNotification) {
-        // 키보드의 높이만큼 화면을 내려준다.
-        nextButton.snp.updateConstraints {
-            $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
-        }
-        view.layoutIfNeeded()
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.beginEditing
+            .map { (color: UIColor.highlighted!, width: 2.0) }
+            .bind(to: emailTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+
+        emailTextField.rx.endEditing
+            .map { (color: UIColor.placeholderText, width: 1.0) }
+            .bind(to: emailTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.endEditing
+            .subscribe { [weak self] _ in
+                // 키보드의 높이만큼 화면을 내려준다.
+                self?.nextButton.snp.updateConstraints {
+                    $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
+                }
+                self?.view.layoutIfNeeded()
+            }
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.returnPressed
+            .subscribe { [weak self] _ in
+                self?.view.endEditing(true)
+            }
+            .disposed(by: disposeBag)
+        
+        // ViewModel -> View
+        viewModel.emailRelay
+            .bind(to: emailTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 사용자가 값을 입력했다면 유효성 검사
+        emailTextField.rx.text.orEmpty
+            .bind(to: viewModel.emailRelay)
+            .disposed(by: disposeBag)
+        
+        viewModel
+            .isEmailValid
+            .subscribe { [weak self] isValid in
+                self?.nextButton.isEnabled = isValid
+            }
+            .disposed(by: disposeBag)
+        
+        // View -> ViewModel
+        nextButton.rx.tap
+            .subscribe { [weak self] _ in
+                guard let self = self else { return }
+                view.endEditing(true)
+                
+                let viewController = PasswordStepViewController()
+                viewController.bind(self.viewModel)
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }

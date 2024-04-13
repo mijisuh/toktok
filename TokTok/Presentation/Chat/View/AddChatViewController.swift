@@ -52,13 +52,13 @@ final class AddChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
+//        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
-        removeKeyboardNotifications()
+//        removeKeyboardNotifications()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class IDStepViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+    
     private lazy var leftBarButtonItem = UIBarButtonItem(
         image: Icon.back.image,
         style: .plain,
@@ -37,8 +41,6 @@ final class IDStepViewController: UIViewController {
         let textField = UITextField.rounded
         textField.placeholder = "한글, 영문 또는 숫자 포함 5~20자"
         textField.returnKeyType = .done
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        textField.delegate = self
         return textField
     }()
     
@@ -46,7 +48,6 @@ final class IDStepViewController: UIViewController {
         let button = UIButton.rounded
         button.setTitle("다음", for: .normal)
         button.isEnabled = false
-        button.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
         return button
     }()
     
@@ -55,22 +56,86 @@ final class IDStepViewController: UIViewController {
         setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
-        removeKeyboardNotifications()
     }
-}
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func bind(_ viewModel: SignUpViewModel) {
+        // 키보드 높이를 Observable로 만듦
+        let keyboardHeight = Observable
+            .from([NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+                .map { notification -> CGFloat in
+                    (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                },
+                   NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+                .map { _ -> CGFloat in 0 }])
+            .merge()
+        
+        // 키보드 높이가 변경될 때
+        keyboardHeight
+            .subscribe { [weak self] height in
+                self?.nextButton.snp.updateConstraints {
+                    $0.bottom.equalToSuperview().inset(height + MARGIN)
+                }
+                self?.view.layoutIfNeeded()
+            }
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.beginEditing
+            .map { (color: UIColor.highlighted!, width: 2.0) }
+            .bind(to: idTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
 
-extension IDStepViewController: UITextFieldDelegate {
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        idTextField.rx.endEditing
+            .map { (color: UIColor.placeholderText, width: 1.0) }
+            .bind(to: idTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.endEditing
+            .subscribe { [weak self] _ in
+                self?.nextButton.snp.updateConstraints {
+                    $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
+                }
+                self?.view.layoutIfNeeded()
+            }
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.text.orEmpty
+            .bind(to: viewModel.idRelay)
+            .disposed(by: disposeBag)
+        
+        idTextField.rx.returnPressed
+            .subscribe { [weak self] _ in
+                self?.view.endEditing(true)
+            }
+        
+        // ViewModel -> View
+        viewModel.idRelay
+            .bind(to: idTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel
+            .isIdValid
+            .subscribe { [weak self] isValid in
+                self?.nextButton.isEnabled = isValid
+            }
+            .disposed(by: disposeBag)
+        
+        // View -> ViewModel
+        nextButton.rx.tap
+            .subscribe { [weak self] _ in
+                guard let self = self else { return }
+                view.endEditing(true)
+                
+                let viewController = ProfileImageStepViewController()
+                navigationController?.pushViewController(viewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -114,36 +179,5 @@ private extension IDStepViewController {
             $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
             $0.height.equalTo(46.0)
         }
-    }
-    
-    @objc func didTapNextButton() {
-        let viewController = ProfileImageStepViewController()
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @objc func textFieldDidChange() {
-        if let text = idTextField.text, !text.isEmpty {
-            nextButton.isEnabled = true
-        } else {
-            nextButton.isEnabled = false
-        }
-    }
-    
-    @objc func keyboardWillShow(_ noti: NSNotification) {
-        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            nextButton.snp.updateConstraints {
-                $0.bottom.equalToSuperview().inset(keyboardHeight + MARGIN)
-            }
-            view.layoutIfNeeded()
-        }
-    }
-
-    @objc func keyboardWillHide(_ noti: NSNotification) {
-        nextButton.snp.updateConstraints {
-            $0.bottom.equalToSuperview().inset(BOTTOM + MARGIN)
-        }
-        view.layoutIfNeeded()
     }
 }

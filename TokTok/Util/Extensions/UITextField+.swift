@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 extension UITextField {
     static var rounded: UITextField {
@@ -20,5 +22,25 @@ extension UITextField {
         textField.rightView = paddingView
         textField.rightViewMode = .always
         return textField
+    }
+}
+
+extension Reactive where Base : UITextField {
+    var borderColorWidth : Binder<(color: UIColor, width: CGFloat)?> {
+        return Binder(self.base) { textfield, colorWidth in
+            textfield.layer.borderColor = colorWidth?.color.cgColor
+            textfield.layer.borderWidth = colorWidth?.width ?? 0.5
+        }
+    }
+        
+    // Textfield의 edit 상태에 대한 event 전달
+    var beginEditing : ControlEvent<Void> {
+        return controlEvent(.editingDidBegin)
+    }
+    var endEditing : ControlEvent<Void> {
+        return controlEvent(.editingDidEnd)
+    }
+    var returnPressed: ControlEvent<Void> {
+        return controlEvent(.editingDidEndOnExit)
     }
 }
