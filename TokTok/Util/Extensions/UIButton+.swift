@@ -13,7 +13,7 @@ extension UIButton {
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         button.setBackgroundColor(.primary, for: .normal)
         button.setBackgroundColor(.primary?.withAlphaComponent(0.9), for: .highlighted)
-        button.setBackgroundColor(.primary?.withAlphaComponent(0.5), for: .disabled)
+        button.setBackgroundColor(.primary?.withAlphaComponent(0.3), for: .disabled)
         button.layer.cornerRadius = 8.0
         button.clipsToBounds = true
         return button
