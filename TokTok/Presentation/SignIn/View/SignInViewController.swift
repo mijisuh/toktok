@@ -7,8 +7,13 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class SignInViewController: UIViewController {
+    private let viewModel = SignInViewModel()
+    private let disposeBag = DisposeBag()
+    
     private var isKeyboardShowed = false
     private var signInView: UIView = UIView()
     
@@ -32,7 +37,6 @@ final class SignInViewController: UIViewController {
         textField.placeholder = "이메일"
         textField.keyboardType = .emailAddress
         textField.returnKeyType = .done
-        textField.delegate = self
         return textField
     }()
     
@@ -41,7 +45,6 @@ final class SignInViewController: UIViewController {
         textField.placeholder = "비밀번호"
         textField.isSecureTextEntry = true
         textField.returnKeyType = .done
-        textField.delegate = self
         return textField
     }()
     
@@ -49,7 +52,6 @@ final class SignInViewController: UIViewController {
         let button = UIButton.rounded
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
         return button
     }()
     
@@ -66,35 +68,23 @@ final class SignInViewController: UIViewController {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .medium)
-        button.addTarget(self, action: #selector(didTapSignUpButton), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        addKeyboardNotifications(#selector(keyboardWillShow), #selector(keyboardWillHide))
+        bind()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
-//        removeKeyboardNotifications()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-}
-
-extension SignInViewController: UITextFieldDelegate {
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        view.layoutIfNeeded()
     }
 }
 
@@ -163,37 +153,117 @@ private extension SignInViewController {
         }
     }
     
-    @objc func didTapSignInButton() {
-        // UINavigationController에서 모든 뷰 컨트롤러를 pop하여 기존 스택 제거
-        let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
-        navigationController?.popToRootViewController(animated: false)
-
-        // 새로운 루트 뷰 컨트롤러 설정
-        let newRootViewController = UINavigationController(rootViewController: TabBarController())
-        UIApplication.shared.windows.first?.rootViewController = newRootViewController
-    }
-    
-    @objc func didTapSignUpButton() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func keyboardWillShow(_ noti: NSNotification) {
-        if !isKeyboardShowed,
-           let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            signInView.snp.updateConstraints {
-                $0.centerY.equalToSuperview().offset(-(signInView.frame.maxY - keyboardRectangle.minY))
+    func bind() {
+        // 키보드 높이를 Observable로 만듦
+        let keyboardRectangle = Observable
+            .from([NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+                .map { notification -> CGRect in
+                    (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? .zero
+                },
+                   NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+                .map { _ -> CGRect in .zero }])
+            .merge()
+        
+        // 키보드 높이가 변경될 때
+        keyboardRectangle
+            .subscribe { [weak self] rect in
+                guard let self = self, !isKeyboardShowed else { return }
+                self.signInView.snp.updateConstraints {
+                    $0.centerY.equalToSuperview().offset(-(self.signInView.frame.maxY - rect.minY))
+                }
+                self.view.layoutIfNeeded()
+                self.isKeyboardShowed = true
             }
-            view.layoutIfNeeded()
-            isKeyboardShowed = true
-        }
-    }
-    
-    @objc func keyboardWillHide(_ noti: NSNotification) {
-        signInView.snp.updateConstraints {
-            $0.centerY.equalToSuperview()
-        }
-        view.layoutIfNeeded()
-        isKeyboardShowed = false
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.beginEditing
+            .map { (color: UIColor.highlighted!, width: 2.0) }
+            .bind(to: emailTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+
+        emailTextField.rx.endEditing
+            .map { (color: UIColor.placeholderText, width: 1.0) }
+            .bind(to: emailTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.endEditing
+            .subscribe { [weak self] _ in
+                guard let self = self, isKeyboardShowed else { return }
+                signInView.snp.updateConstraints {
+                    $0.centerY.equalToSuperview()
+                }
+                view.layoutIfNeeded()
+                isKeyboardShowed = false
+            }
+            .disposed(by: disposeBag)
+        
+        emailTextField.rx.returnPressed
+            .subscribe { [weak self] _ in
+                guard let self = self, isKeyboardShowed else { return }
+                self.view.endEditing(true)
+                view.layoutIfNeeded()
+                isKeyboardShowed = false
+            }
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.beginEditing
+            .map { (color: UIColor.highlighted!, width: 2.0) }
+            .bind(to: passwordTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+
+        passwordTextField.rx.endEditing
+            .map { (color: UIColor.placeholderText, width: 1.0) }
+            .bind(to: passwordTextField.rx.borderColorWidth)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.endEditing
+            .subscribe { [weak self] _ in
+                guard let self = self, isKeyboardShowed else { return }
+                signInView.snp.updateConstraints {
+                    $0.centerY.equalToSuperview()
+                }
+                view.layoutIfNeeded()
+                isKeyboardShowed = false
+            }
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.returnPressed
+            .subscribe { [weak self] _ in
+                guard let self = self, isKeyboardShowed else { return }
+                self.view.endEditing(true)
+                view.layoutIfNeeded()
+                isKeyboardShowed = false
+            }
+            .disposed(by: disposeBag)
+        
+        // ViewModel -> View
+        viewModel.emailRelay
+            .bind(to: emailTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.passwordRelay
+            .bind(to: passwordTextField.rx.text)
+            .disposed(by: disposeBag)
+
+        // View -> ViewModel
+        signInButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.view.endEditing(true)
+                
+                // UINavigationController에서 모든 뷰 컨트롤러를 pop하여 기존 스택 제거
+                let navigationController = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+                navigationController?.popToRootViewController(animated: false)
+
+                // 새로운 루트 뷰 컨트롤러 설정
+                let newRootViewController = UINavigationController(rootViewController: TabBarController())
+                UIApplication.shared.windows.first?.rootViewController = newRootViewController
+            }
+            .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .subscribe { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }

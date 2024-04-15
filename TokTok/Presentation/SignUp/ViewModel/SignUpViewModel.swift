@@ -46,7 +46,7 @@ struct SignUpViewModel {
             }
     }
     
-    // 모든 유효성 검사 결과를 결합하여 최종 유효성 검사 결과를 반환하는 Observable
+    // 비밀번호에 대한 모든 유효성 검사 결과를 결합하여 최종 유효성 검사 결과를 반환하는 Observable
     var isValidPassword: Observable<Bool> {
         Observable
             .combineLatest(isPasswordValid, isConfirmPasswordValid)
