@@ -36,6 +36,7 @@
 		095F05992BC2C86400BCE946 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F05982BC2C86400BCE946 /* Icon.swift */; };
 		095F059C2BC2CB9200BCE946 /* Floaty in Frameworks */ = {isa = PBXBuildFile; productRef = 095F059B2BC2CB9200BCE946 /* Floaty */; };
 		095F059E2BC2CDED00BCE946 /* AddChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095F059D2BC2CDED00BCE946 /* AddChatViewController.swift */; };
+		09B1BDFB2BCEA9AD000A906F /* ChatListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B1BDFA2BCEA9AD000A906F /* ChatListViewModel.swift */; };
 		09BFECCA2BBEDC4900DBF7F1 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECC92BBEDC4900DBF7F1 /* RxCocoa */; };
 		09BFECCC2BBEDC4900DBF7F1 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCB2BBEDC4900DBF7F1 /* RxRelay */; };
 		09BFECCE2BBEDC4900DBF7F1 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 09BFECCD2BBEDC4900DBF7F1 /* RxSwift */; };
@@ -81,6 +82,7 @@
 		095F05922BC2B92800BCE946 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		095F05982BC2C86400BCE946 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		095F059D2BC2CDED00BCE946 /* AddChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChatViewController.swift; sourceTree = "<group>"; };
+		09B1BDFA2BCEA9AD000A906F /* ChatListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewModel.swift; sourceTree = "<group>"; };
 		09BFECD22BBEE98700DBF7F1 /* EmailStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailStepViewController.swift; sourceTree = "<group>"; };
 		09F77C112BBEA6E20094CFC9 /* TokTok.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TokTok.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F77C142BBEA6E20094CFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,8 +159,17 @@
 			isa = PBXGroup;
 			children = (
 				09F94C9F2BCA998E006A842C /* View */,
+				09B1BDFC2BCEA9B0000A906F /* ViewModel */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		09B1BDFC2BCEA9B0000A906F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				09B1BDFA2BCEA9AD000A906F /* ChatListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		09F77C082BBEA6E20094CFC9 = {
@@ -433,6 +444,7 @@
 			files = (
 				0913CC172BC07F460071CF2D /* UILabel+.swift in Sources */,
 				0913CC192BC088DC0071CF2D /* UITextField+.swift in Sources */,
+				09B1BDFB2BCEA9AD000A906F /* ChatListViewModel.swift in Sources */,
 				095F058E2BC2990700BCE946 /* TabBarItem.swift in Sources */,
 				0913CC1F2BC0AE800071CF2D /* Constant.swift in Sources */,
 				09F77C192BBEA6E20094CFC9 /* MainViewController.swift in Sources */,
